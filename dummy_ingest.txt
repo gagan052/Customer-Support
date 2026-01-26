@@ -1,0 +1,3 @@
+The secret code for the project is BLUE-OMEGA-99.
+This is a test document to verify the ingestion pipeline.
+Project Alpha requires this code for access.

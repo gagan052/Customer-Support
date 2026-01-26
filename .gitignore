@@ -1,0 +1,15 @@
+# General
+node_modules
+dist
+.DS_Store
+.env
+.vscode
+
+# Angular
+.angular
+
+# Python
+__pycache__
+*.pyc
+venv
+.venv

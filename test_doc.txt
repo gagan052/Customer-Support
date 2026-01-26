@@ -1,0 +1,1033 @@
+
+Training Report
+On
+Azure AI Service
+Submitted for Partial Fulfillment of the
+Award of Bachelor of Technology (B.Tech) in
+CSE Deptt.
+Kurukshetra University Kurukshetra
+Submitted By:
+Gagan (1222052)
+Submitted to:
+Department of Computer Science & Engineering
+JMIT Radaur
+Affiliated to Kurukshetra University Kurukshetra
+Declaration
+I hereby certify that the work which is being presented in the Training Report entitled,
+“Azure AI Service” by me, Gagan (1222052) in partial fulfillment of the requirements for
+the award of degree of Bachelor of Technology in Computer Science & Engineering
+at JMIT Radaur (Affiliated to Kurukshetra University Kurukshetra) is an authentic record
+of my own work carried out under the supervision of Dr./Prof./Er. Supervisor Name.
+(Candidate Name & Signature)
+Acknowledgement
+The writing of this training report has been assisted by the generous help of many
+people. I feel that I was very fortunate to receive assistance from them. I wish to
+express my sincere appreciation to them.
+First and foremost, I am indebted to my principal supervisor, ICT Academy
+sponsored by Infosys who has been very supportive at every stage of my
+preparations. I wish to express my utmost gratitude to him/her for his/her invaluable
+advice and patience in reading, correcting and commenting on the drafts of the report
+and, more importantly, for his/her generosity which I have received throughout my
+training program.
+I would like to acknowledge and extended my heartfelt gratitude to Dr. Gaurav
+Sharma, Head of Department who provided me the golden opportunity to undergo
+and complete this training program.
+I wish to express my thanks to Er. Rajiv Bansal who also helped me in conducting
+this study and encouraged me throughout this journey.
+Finally, I am particularly indebted to my dearest parents/guardians as without their
+generous assistance and love; this dissertation could never have been completed.
+Gagan
+1222052
+Preface
+Objectives of the Training:
+This report presents a comprehensive overview of the Summer Training Program on Azure AI
+Services, organized by ICT Academy in collaboration with Infosys. The training was designed to
+provide students with practical exposure to Artificial Intelligence, Cloud Computing, and Microsoft
+Azure technologies, enabling them to gain hands-on experience in building and deploying intelligent
+solutions.
+The modern world is driven by innovation, automation, and data. Artificial Intelligence has emerged as
+one of the most transformative technologies of this era, reshaping industries and redefining how
+businesses operate. Understanding this, ICT Academy and Infosys introduced this summer training to
+help students develop a strong foundation in AI-based development and gain real-world exposure to the
+tools and services used by professionals in the IT industry.
+This training served as a bridge between academic knowledge and practical implementation. It provided
+an opportunity to work with Azure AI tools such as Cognitive Services, Language Understanding
+(LUIS), Azure Bot Service, and Computer Vision. Through a series of guided sessions, exercises, and
+projects, students learned to build AI Agents, design chatbots using Python, and implement AI-driven
+features such as image detection and video creation.
+The training methodology followed a balanced approach—starting with conceptual understanding and
+moving towards hands-on experimentation. Each session was carefully structured to ensure that students
+not only grasped the underlying theory but also learned how to apply it effectively using Azure’s cloud-
+based ecosystem. By the end of the training, participants had developed the ability to integrate AI
+services into applications, enhancing their analytical and problem-solving capabilities.
+This report aims to document the key learnings, experiences, and outcomes of the training program. It
+covers the objectives, course content, practical exercises, and the final project work completed during
+the training. The report also reflects how this program contributed to improving technical competence,
+creativity, and professional readiness among participants.
+I would like to express my sincere gratitude to ICT Academy and Infosys for organizing this valuable
+training program and providing a platform to explore advanced AI technologies. I am also thankful to
+the trainers and mentors for their constant guidance, support, and insightful sessions that made the
+learning experience engaging and enriching.
+Lastly, this training not only enhanced my technical skills but also broadened my understanding of how
+artificial intelligence can be effectively utilized to solve real-world problems. It was a step toward
+becoming industry-ready and confident in implementing AI-driven solutions using modern cloud
+technologies.
+Through this report, I aim to present a detailed account of my journey, learning outcomes, and the
+overall impact of this summer training on my academic and professional growth.
+Table of Contents
+Certificate of Training (Photo Copy Only) ............................................................................ i
+Declaration ............................................................................................................................ ii
+Acknowledgement ................................................................................................................. iii
+Preface (Objective of the Training) ....................................................................................... iv
+Table of Contents ................................................................................................................... v
+Profile of the Company & Training Division ........................................................................ vi
+Scheduled Chart of Training Activities ................................................................................. vii
+List of Figures… ................................................................................................................................ viii
+List of Tables… ................................................................................................................................. ix
+List of Abbreviations… ..................................................................................................................... x
+Chapters (As per the actual):
+Chapter 1: Introduction
+Chapter 2: Academic & Technical Importance of the Learning/Observed Sequence
+Chapter 3: Detail Study of Processes
+Chapter 4: Proposed System Architecture and Design of the Problem
+Chapter 5: Prototyped Module Implementations
+Chapter 6: Future Scope & Limitations
+Chapter 7: Learning Outcomes & Conclusion
+Chapter 8: Bibliography
+Chapter 9: Appendix
+Company Profile
+ICT Academy (Sponsored by Infosys)
+ICT Academy is a public–private partnership organization established with the mission of developing
+the next generation of skilled professionals for the global IT and technology industry. It is an initiative
+of the Government in collaboration with leading corporates such as Infosys, Microsoft, IBM, Dell, and
+CISCO, and several premier educational institutions.
+The Academy focuses on bridging the skill gap between industry and academia by conducting faculty
+development programs, student training, industry certifications, research initiatives, and
+entrepreneurship development programs. ICT Academy serves as a platform for knowledge exchange
+between academic institutions and the corporate sector, ensuring that students acquire industry-relevant
+technical and soft skills.
+During my summer training, ICT Academy partnered with Infosys to deliver a specialized program on
+Microsoft Azure AI Services. The training provided hands-on experience in developing AI-based
+solutions using cloud technologies. The initiative aimed to help students understand the practical
+implementation of artificial intelligence through Azure’s cognitive and machine learning tools.
+Through its consistent efforts, ICT Academy has become one of India’s leading organizations for digital
+skill development and capacity building. It continues to empower students and educators by offering
+high-quality learning resources, global technology exposure, and real-world project experience.
+TRAINING SCHEDULE w.e.f. July 16, 2025
+Time
+Duration
+Contents
+INTRODUCTORY
+WEEK
+(16-07-2025 to 18-
+07-2025)
+Introduction to Cloud Computing and Microsoft Azure. Overview of the
+Azure Portal and Resource Management. Understanding Cloud Service
+Models (IaaS, PaaS, SaaS). Introduction to Artificial Intelligence concepts
+and their real-world applications. Exploring Azure AI Services and
+Cognitive APIs.
+WEEK-1
+(18-07-2025 to
+23-07-2025)
+Detailed exploration of Azure Cognitive Services. Working with
+Computer Vision API for image analysis and object detection.
+Implementing Face API for face recognition and emotion detection.
+Understanding API keys, endpoints, and JSON responses. Created the first
+project – Emotion Detection App using Face API.
+WEEK-2
+(24-07-2025 to
+29-07-2025)
+Introduction to Speech Services in Azure. Implemented Speech-to-Text
+and Text-to-Speech functionalities. Configured Azure Speech SDK and
+built a simple Text Reader Application. Worked on Language
+Understanding (LUIS) for intent recognition. Integration of AI services
+into a web app using Python/JavaScript.
+WEEK-3
+(30-07-2025 to 2-
+08-2025)
+Worked with Azure Translator API for multilingual text translation. Built
+a small Language Translator Application. Understood Azure Bot Service
+and integrated a basic chatbot with LUIS and QnA Maker. Focused on
+chatbot logic, natural language queries, and cloud deployment.
+WEEK-4
+(3-07-2025 to 7-
+08-2025)
+Final project development combining multiple Azure AI Services.
+Developed and deployed a Smart AI Assistant integrating vision, speech,
+and translation capabilities. Understood deployment on Azure Web App
+service. Completed project documentation and final presentation.
+Chapter 1: Introduction
+The Summer Training Program conducted by ICT Academy in collaboration with Infosys was a
+highly valuable learning experience aimed at providing students with practical exposure to the rapidly
+evolving world of Artificial Intelligence (AI) and Cloud Computing. The training focused on
+developing technical proficiency in using Microsoft Azure AI Services, a cloud-based platform that
+enables the creation and deployment of intelligent applications. Through this program, students gained
+an in-depth understanding of various AI tools, frameworks, and methodologies that are transforming
+industries across the globe.
+The primary objective of this summer training was to bridge the gap between classroom learning and
+industry requirements. In today’s digital era, artificial intelligence plays a crucial role in automating
+tasks, improving decision-making, and enhancing user experiences. This training enabled participants to
+understand how AI models are designed, trained, and integrated into real-world applications. The
+inclusion of Azure AI Services made the learning process industry-oriented, as Microsoft Azure is one
+of the leading cloud platforms used by global enterprises for AI and data-driven solutions.
+Throughout the training, participants explored multiple aspects of AI, including the concepts of AI
+Agents, Machine Learning, Natural Language Processing (NLP), and Computer Vision. One of the
+key highlights was building AI Agents on Azure, which act as intelligent entities capable of performing
+specific tasks such as answering questions, analyzing images, or generating insights. Students learned
+how to create, configure, and deploy these agents using Azure’s pre-built cognitive services and APIs.
+Another major component of the program was the development of chatbots using Python and Azure’s
+Bot Framework. This part of the training provided hands-on experience in creating conversational AI
+systems capable of interacting with users in natural language. By integrating Azure’s Language
+Understanding (LUIS) and QnA Maker, the chatbots were able to process user input, understand
+intent, and provide intelligent, context-based responses. This project-based learning approach helped
+participants strengthen both their programming skills and their understanding of AI logic and
+architecture.
+The training also covered image detection and video creation using Azure AI. Participants were
+introduced to the Azure Computer Vision service, which provides powerful tools for analyzing visual
+content such as images and videos. Through practical sessions, they learned how to detect objects,
+identify scenes, and generate automated descriptions using Azure’s pre-trained AI models. Additionally,
+the training explored how AI can be used to create and enhance videos, demonstrating the practical
+applications of AI in multimedia content generation, digital marketing, and surveillance systems.
+Beyond technical skills, this training emphasized the importance of innovation and problem-solving.
+Students were encouraged to apply AI concepts to real-world challenges and to think creatively about
+how technology can be used for social and industrial transformation. Working in a collaborative
+environment under the mentorship of ICT Academy and Infosys trainers, participants developed critical
+thinking, teamwork, and project management abilities that are essential in professional settings.
+By the end of the program, participants had not only gained a comprehensive understanding of Azure AI
+Services but also developed functional AI-driven applications. This experience provided a strong
+foundation for pursuing future projects and careers in Artificial Intelligence, Machine Learning, and
+Cloud Computing.
+In conclusion, the ICT Academy–Infosys Summer Training on Azure AI Services served as a
+gateway for students to enter the world of intelligent technologies. It combined theoretical learning with
+extensive practical sessions, enabling participants to design, build, and deploy smart systems that mimic
+human intelligence. The knowledge and skills acquired during this training will prove invaluable in
+adapting to the demands of the modern technology landscape and in contributing to future advancements
+in artificial intelligence and cloud-based innovation.
+Chapter 2: Academic &
+Technical Importance of the
+Learning
+The Summer Training on Azure AI Services organized by ICT Academy in collaboration with
+Infosys was not only a skill-development program but also an academically enriching experience that
+bridged theoretical concepts with their industrial applications. This training held significant importance
+from both academic and technical perspectives, as it enabled participants to understand, apply, and
+innovate using Artificial Intelligence (AI) and Cloud Computing technologies.
+Academic Importance
+From an academic standpoint, the training provided a deeper understanding of core Artificial
+Intelligence concepts beyond the traditional classroom curriculum. While most academic programs
+introduce the fundamentals of programming, data structures, and algorithms, this training extended those
+principles into the real-world domain of AI and cloud-based development. It demonstrated how
+mathematical and logical concepts studied in courses like Data Science, Machine Learning, and
+Database Systems are practically applied to design intelligent systems.
+The program also helped strengthen analytical and problem-solving abilities by involving participants in
+project-based learning. The hands-on sessions with Microsoft Azure AI Services encouraged critical
+thinking and experimentation, fostering a learning-by-doing approach. This made it easier to connect
+classroom theory with real-world implementations, particularly in areas such as Natural Language
+Processing (NLP), Image Recognition, and Automated Decision Systems.
+Moreover, the exposure to AI-driven tools and APIs such as Cognitive Services, Language
+Understanding (LUIS), and Computer Vision expanded academic knowledge about how artificial
+intelligence integrates with cloud platforms to deliver scalable and efficient solutions. This direct
+interaction with enterprise-level technologies enhanced technical literacy and aligned the academic
+learning process with the latest industrial practices.
+The training also played a crucial role in building a strong foundation for future academic projects and
+research work. The understanding of AI agents, chatbots, and image detection systems can be applied in
+final-year projects, internships, and higher studies focusing on AI, Data Science, or Machine Learning.
+Thus, the program significantly contributed to the academic growth of participants by providing the
+necessary tools, exposure, and confidence to handle complex technical challenges.
+Technical Importance
+Technically, the training was highly valuable in equipping participants with the skills required to build
+intelligent and automated systems using Microsoft Azure AI Services. Through practical sessions,
+students learned how to design, develop, and deploy AI applications that interact intelligently with users
+and the environment.
+A major technical achievement of the program was learning to build AI Agents using Azure tools.
+These agents are capable of performing specific tasks autonomously, such as responding to user queries,
+analyzing content, or generating insights. Participants were guided on how to configure these agents
+using Azure’s Cognitive Services, which include tools for speech recognition, text analytics, image
+processing, and sentiment analysis.
+Another key component was the development of chatbots using Python integrated with Azure AI.
+Students gained practical experience in creating conversational interfaces that can interpret natural
+language inputs and provide meaningful responses. They learned how to connect Python-based
+applications to Azure Bot Framework, deploy bots on cloud servers, and integrate them with various
+communication platforms. This technical knowledge is crucial in today’s AI-driven industry, where
+conversational AI is being widely adopted across sectors like customer service, healthcare, and
+education.
+Additionally, the training covered image detection and video generation using Azure’s Computer
+Vision API. Students learned to apply deep learning-based models for object detection, face recognition,
+and scene description. They also explored how video content can be created or analyzed using AI for
+tasks like monitoring, content tagging, and automated editing. This provided a comprehensive
+understanding of how visual data can be processed and utilized effectively through AI-powered cloud
+services.
+The technical exposure to cloud-based deployment, API integration, and data handling also
+enhanced the participants’ understanding of scalable and reliable software architecture. Students became
+familiar with how AI models are hosted, tested, and maintained on cloud infrastructure, ensuring
+performance and accessibility across different environments.
+Conclusion
+In summary, the summer training had immense academic and technical importance. Academically, it
+strengthened theoretical understanding and improved the connection between coursework and real-world
+AI applications. Technically, it provided hands-on experience in building, training, and deploying
+intelligent systems using Microsoft Azure AI tools and Python programming.
+By completing this training, students not only enhanced their technical competency but also gained
+confidence to work on modern AI technologies—an essential skill set for future careers in computer
+science and information technology. The program served as a foundation for continuous learning,
+innovation, and research in the growing field of Artificial Intelligence and Cloud Computing.
+Chapter 3: Detail Study of
+Processes
+The Summer Training on Azure AI Services, organized by ICT Academy in collaboration with
+Infosys, followed a structured, step-by-step process designed to ensure systematic learning and hands-on
+experience. Each stage of the training was carefully planned to introduce students to the core principles
+of Artificial Intelligence, followed by practical implementation using Microsoft Azure and Python
+programming. The processes involved both theoretical instruction and real-time practice to develop a
+complete understanding of AI-driven application development.
+3.1 Overview of the Training Process
+The training program was divided into distinct modules, each focusing on a specific aspect of Azure AI
+Services. The process began with foundational sessions to build conceptual clarity and gradually
+progressed toward the development and deployment of intelligent systems. The sequence of learning
+included:
+1. Introduction to Cloud Computing and Azure
+2. Understanding Artificial Intelligence and its Real-World Applications
+3. Exploring Azure AI Services and Tools
+4. Building AI Agents and Chatbots
+5. Implementing Image Detection and Video Creation Using AI
+6. Final Project Development and Presentation
+Each stage included demonstrations, guided exercises, and project assignments to ensure that theoretical
+learning translated into technical proficiency.
+3.2 Introduction to Cloud Computing and Microsoft Azure
+The training began with an introduction to Cloud Computing, where participants learned about its
+models—IaaS, PaaS, and SaaS—and how cloud technology enables scalable and flexible AI
+development.
+After establishing this foundation, students were introduced to Microsoft Azure, its ecosystem, and the
+Azure Portal interface. They learned how to create an Azure account, navigate the dashboard, and
+access AI-related services such as:
+• Azure Cognitive Services
+• Azure Bot Service
+• Azure Machine Learning Studio
+• Language Understanding (LUIS)
+• Azure Computer Vision
+This module provided an essential understanding of how cloud infrastructure supports AI model
+training, deployment, and resource management.
+3.3 Understanding Artificial Intelligence Concepts
+Once familiar with Azure, students explored the fundamentals of Artificial Intelligence and Machine
+Learning. The training covered the basic workflow of AI systems—data collection, preprocessing,
+model building, testing, and deployment.
+Concepts such as Natural Language Processing (NLP), Computer Vision, and Conversational AI
+were introduced to explain how machines can simulate human intelligence.
+Through interactive sessions, participants learned the logic behind decision-making algorithms, neural
+networks, and AI-based data interpretation. This conceptual clarity was crucial before moving on to
+practical AI implementations using Azure.
+3.4 Building AI Agents Using Azure AI Services
+One of the core parts of the training involved building AI Agents using Azure’s Cognitive Services.
+These agents are intelligent entities capable of performing automated tasks such as analyzing text,
+recognizing images, or responding to user inputs.
+The process involved:
+1. Creating an Azure AI Service Resource in the Azure Portal.
+2. Configuring AI Agent capabilities (language, vision, or speech-based).
+3. Connecting APIs for tasks like text analytics, sentiment analysis, or image classification.
+4. Integrating AI Agents into Python applications using Azure SDKs.
+Students learned how to use Azure’s REST APIs to connect their applications to the cloud and perform
+intelligent tasks in real time. This helped them understand the backend process of AI service interaction
+and data exchange between local applications and cloud servers.
+3.5 Developing Chatbots Using Python and Azure Bot Service
+Another major component of the training was the development of chatbots. Using Azure Bot Service
+and Language Understanding (LUIS), participants built conversational agents capable of
+understanding and responding to user messages.
+The process included:
+1. Designing chatbot flow using Azure Bot Framework.
+2. Creating a LUIS app for natural language understanding.
+3. Training LUIS models to recognize user intents and entities.
+4. Connecting the chatbot to Azure Bot Service.
+5. Writing backend logic in Python to process and respond to user queries.
+6. Deploying the chatbot to communication platforms such as Microsoft Teams or a web interface.
+This project-based module demonstrated how conversational AI can be used in real-world applications
+like virtual assistants, customer support systems, and automated helpdesks.
+3.6 Implementing Image Detection and Video Creation
+The next stage involved using Azure Computer Vision and Video Indexer services to perform visual
+intelligence tasks.
+Image Detection Process:
+• Uploading images to Azure Blob Storage.
+• Using Computer Vision API to detect objects, faces, and text in images.
+• Extracting insights such as tags, descriptions, and categories.
+• Integrating image detection results into Python applications.
+Video Creation and Analysis Process:
+• Using Azure Video Analyzer to create and interpret video content.
+• Understanding how AI models detect scenes, emotions, and activities.
+• Implementing video-based analytics for content summarization and monitoring.
+Through these exercises, students gained hands-on experience in computer vision and media processing,
+two vital areas in modern AI applications.
+3.7 Project Development and Implementation
+Toward the end of the training, participants were tasked with developing a mini-project that integrated
+multiple Azure AI services. The project workflow typically included:
+1. Identifying a real-world problem suitable for AI implementation.
+2. Designing an AI-driven solution architecture.
+3. Integrating AI Agents, Chatbots, and Cognitive APIs using Azure and Python.
+4. Testing and refining the application for accuracy and performance.
+5. Presenting the final solution to mentors and peers for evaluation.
+This stage helped reinforce all the concepts learned throughout the program and demonstrated the
+participants’ ability to apply AI and cloud technologies effectively.
+3.8 Summary of Learning Process
+The entire process of training was carefully sequenced, combining conceptual learning with practical
+execution. Participants not only gained theoretical knowledge but also acquired hands-on skills in:
+• Cloud service deployment using Azure.
+• Python integration with AI services.
+• Building and deploying chatbots.
+• Performing image and video analytics.
+• Managing and scaling AI-based applications in the cloud.
+Conclusion
+The detailed process of learning during this summer training enabled participants to understand the
+complete lifecycle of AI application development—from conceptualization to deployment. The
+combination of Microsoft Azure’s cloud infrastructure and Python’s flexibility provided an industry-
+relevant learning experience.
+By the end of the program, participants had developed the ability to design intelligent systems capable
+of real-time interaction, analysis, and automation. The training thus laid a strong foundation for future
+academic research, professional projects, and career advancement in Artificial Intelligence and Cloud
+Computing.
+Chapter 4: Proposed System
+Architecture and Design of the
+Problem
+4.1 Problem Definition
+Build an AI-driven assistant that can:
+1. answer user queries via a chatbot,
+2. perform image understanding (object/text detection), and
+3. assist with video analytics or basic video generation tasks.
+The solution must run on Microsoft Azure, use Azure AI services, and expose APIs a Python
+backend can consume.
+4.2 Solution Overview
+The system is a cloud-first, modular application with three primary capabilities:
+• Conversational AI: An AI agent connected to a chatbot to interpret intents and respond.
+• Computer Vision: Image detection, OCR, tagging, and descriptions.
+• Video Intelligence: Indexing, scene insights, and basic assisted video creation or summaries.
+All capabilities are orchestrated by a Python backend that calls Azure AI Services through secured
+REST/SDK endpoints, persists results in storage, and logs telemetry.
+4.3 High-Level Architecture
+Key components
+• Client Channels: Web app, Teams/Telegram (optional), or CLI.
+• Bot & Orchestration: Azure Bot resource or direct Python webhook + AI agent invocations.
+• Language Understanding: Azure language service for intent/entity extraction and grounding.
+• Vision Services: Azure Computer Vision/OCR for image tasks.
+• Video Services: Azure Video Indexer / Video Analyzer for video insights; optional templated
+video creation pipeline.
+• Python Backend (App Service/Container): Routing, business logic, validation, result
+aggregation.
+• Storage & Data: Azure Blob Storage (media), Azure Table/Cosmos DB (metadata), optional
+Azure SQL (structured).
+• Identity & Security: Azure AD, Managed Identity, Key Vault.
+• Observability: Application Insights, Azure Monitor.
+4.4 Component Design
+• Frontend/Channel: Simple web UI or chat channel. Sends text or uploads media securely to
+backend endpoints.
+• Python Backend:
+o Endpoints: /chat, /image/analyze, /video/analyze, /video/create.
+o Tasks: Input validation, content moderation hooks, service selection, retry/circuit-
+breaker, response formatting.
+o SDK/REST integration: Calls Azure AI endpoints using Managed Identity or Key Vault-
+stored secrets.
+• Language Understanding: Extracts intent, entities, and generates assistant responses.
+• Computer Vision: Object detection, OCR, description, tags.
+• Video Intelligence: Uploads video to storage, triggers indexing, retrieves transcript, scenes,
+faces, labels; optionally composes a highlight reel from timestamps.
+• Data Layer:
+o Blob Storage: Raw images/videos and analysis artifacts (JSON).
+o Cosmos DB / Table: Per-request metadata, user session state, intent logs.
+o SQL (optional): Reports, audit summaries, analytics-friendly tables.
+• Security: Azure AD auth, RBAC, private endpoints where viable, Key Vault for secrets, content
+moderation policy.
+• Observability: Application Insights traces, metrics, request IDs, correlation IDs.
+4.5 Data Design
+• Entities
+o UserSession(sessionId, userId, channel, startedAt, lastActiveAt)
+o ChatTurn(sessionId, turnId, userText, intent, entities, botReply,
+createdAt)
+o ImageAnalysis(requestId, blobUrl, tags[], objects[], ocrText,
+confidence, createdAt)
+o VideoAnalysis(requestId, blobUrl, transcript, scenes[], people[],
+labels[], keyMoments[], createdAt)
+• Storage Strategy
+o Large media in Blob; JSON analysis in Blob or Cosmos DB; compact metadata in
+Cosmos DB/Table.
+4.6 Process Flow (Text, Image, Video)
+A. Chat/Text
+1. User sends message → frontend.
+2. Backend logs request, runs input checks.
+3. Backend calls Language service for intent/entities.
+4. If FAQ/KB, query KB; else route to vision/video if requested.
+5. Compose reply and store ChatTurn.
+6. Return response.
+B. Image Analysis
+1. User uploads image.
+2. Backend stores in Blob, creates requestId.
+3. Call Computer Vision/OCR → get tags, objects, text.
+4. Persist results and return a summarized response.
+C. Video Analysis / Creation
+1. User uploads video or provides required inputs for creation.
+2. Backend stores video and triggers Video Indexer/Analyzer.
+3. Poll or event-driven callback for insights.
+4. Persist insights; if creation requested, assemble segments/templates.
+5. Return insights or generated artifact URL.
+4.7 Flowchart (Consolidated)
+┌───────────────────────┐
+│ Start (User Request) │ └───────────┬───────────┘
+▼
+┌───────────────────┐ │ Validate Input │
+└───────┬──────────┘
+▼
+┌─────────────────────────┐
+│ Determine Request Type │
+│ (Chat / Image / Video) │
+└─────────┬───────┬──────┘ │ │ Chat ─────┘ │
+│
+▼
+Image? ──┬── Yes ─► [Store Blob] ► [Vision API]
+│ └► [Persist Results]
+│ │
+│ ▼ │ [Summarize]
+│ │
+▼ ▼
+Video? ──┬── Yes ─► [Store Blob] ► [Video Analyze/Create]
+│ └► [Persist Results]
+│ │
+│ ▼ └── No ─► [Language Svc + KB] [Compose Reply]
+│
+▼
+[Return Response]
+│
+▼
+End
+4.9 Deployment Topology
+• App Service or Azure Container Apps for the Python backend.
+• Private endpoints for AI services and Storage where feasible.
+• Azure Front Door or Application Gateway in front of the API.
+• Key Vault for secrets.
+• Application Insights for telemetry.
+4.10 Non-Functional Requirements
+• Security: AAD auth, role-based access, encrypted storage in transit and at rest.
+• Scalability: Autoscale backend and use async jobs for video.
+• Reliability: Retry policies, idempotent request IDs, dead-letter for failed jobs.
+• Performance: CDN for media delivery, caching of frequent KB responses.
+• Observability: Centralized logs, metrics, and alerts.
+• Cost Control: Tiered services, lifecycle rules for Blob, scheduled cleanup.
+4.11 Assumptions and Constraints
+• Internet access is available for cloud calls.
+• Media sizes are within service limits.
+• Some video features may be asynchronous and return results after analysis completes.
+• Content moderation policies are enforced for uploads and outputs.
+4.12 Traceability to Training Objectives
+• AI Agents & Chatbot: Covered by the language service + bot orchestration.
+• Image Detection: Computer Vision path and storage workflow.
+• Video Creation/Analysis: Video pipeline with indexing and optional templating.
+• Python Integration: Central orchestrator calling Azure AI via SDK/REST.
+Chapter 5: Prototyped Module
+Implementations
+5.1 Overview
+The Summer Training on Azure AI Services organized by ICT Academy in collaboration with
+Infosys included the development of several prototype modules that demonstrated practical applications
+of Artificial Intelligence through Microsoft Azure. Each module was designed to provide a hands-on
+experience in implementing cloud-based AI solutions using Azure AI Services integrated with Python.
+The prototypes developed during the training illustrated the use of AI Agents, Chatbots, Image
+Detection, and Video Creation/Analysis. These modules showcased the core functionalities of Azure’s
+Cognitive Services and their integration with Python for building intelligent, real-world applications.
+The implementation process followed a step-by-step approach—starting with configuration in Azure,
+developing backend logic in Python, integrating the AI services, and finally testing the solution through
+real-time inputs.
+5.2 Module 1: AI Agent Integration with Azure Cognitive
+Services
+Objective:
+To create an AI agent that can analyze user inputs and provide intelligent responses by utilizing Azure
+Cognitive Services.
+Implementation Steps:
+1. Resource Creation:
+o Created an Azure Cognitive Services resource and obtained API keys and endpoints.
+o Configured services like Text Analytics, Language Understanding (LUIS), and QnA
+Maker for different tasks.
+2. Python Backend Setup:
+o Developed a Python script using Azure SDK and REST API calls.
+o Implemented logic to send user queries to Azure Cognitive Services for analysis and
+response generation.
+3. Features Implemented:
+o Text Sentiment Analysis: Detects whether user input is positive, neutral, or negative.
+o Language Detection: Automatically identifies the language of the given input.
+o Entity Recognition: Extracts keywords, names, and places from text using Azure’s NLP
+models.
+4. Output:
+The AI Agent analyzed user input and returned a structured response containing sentiment,
+detected entities, and possible suggestions.
+Example Python Snippet:
+from azure.ai.textanalytics import TextAnalyticsClient
+from azure.core.credentials import AzureKeyCredential
+endpoint = "https://<your-resource>.cognitiveservices.azure.com/"
+key = "<your-key>"
+client = TextAnalyticsClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+text = ["Azure AI Services make it easy to build intelligent apps!"]
+response = client.analyze_sentiment(documents=text)[0]
+print("Sentiment:", response.sentiment)
+print("Positive Score:", response.confidence_scores.positive)
+5.3 Module 2: Chatbot Development using Python and Azure
+Bot Service
+Objective:
+To build a chatbot that interacts with users conversationally, understands natural language queries, and
+provides intelligent responses using Azure Bot Service and Language Understanding (LUIS).
+Implementation Steps:
+1. Azure Bot Configuration:
+o Created a new Bot resource in Azure and linked it with a LUIS application for intent
+recognition.
+o Defined multiple intents such as greeting, help, and information request.
+2. LUIS Model Training:
+o Trained the LUIS model with sample phrases for each intent.
+o Published the model and obtained an endpoint key.
+3. Python Bot Logic:
+o Built a chatbot backend using Flask and Azure SDK to handle incoming messages.
+o Integrated the bot with the LUIS endpoint to interpret user inputs and determine intent.
+4. Features Implemented:
+o Natural language understanding through LUIS.
+o Custom responses for user intents.
+o Session management and chat history tracking.
+Example Python Snippet:
+import requests
+luis_url = "https://<your-luis-endpoint>/luis/prediction/v3.0/apps/<app-
+id>?subscription-key=<key>&query="
+def get_intent(user_input):
+response = requests.get(luis_url + user_input)
+data = response.json()
+intent = data['prediction']['topIntent']
+return intent
+user_input = input("You: ")
+print("Bot Intent:", get_intent(user_input))
+Output:
+The chatbot successfully interpreted user inputs such as “Tell me about Azure AI” or “Hi there!” and
+returned accurate, intent-based responses.
+5.4 Module 3: Image Detection using Azure Computer Vision
+Objective:
+To develop an application that can detect objects, extract text, and describe scenes from uploaded
+images using Azure Computer Vision API.
+Implementation Steps:
+1. Azure Configuration:
+o Created an Azure Computer Vision resource and obtained its endpoint and key.
+o Configured the resource for object detection, OCR (Optical Character Recognition), and
+tagging.
+2. Python Implementation:
+o Used the azure-cognitiveservices-vision-computervision SDK.
+o Wrote a function to send an image to the Azure endpoint for analysis.
+3. Functionalities Implemented:
+o Object Detection: Identifies and labels objects present in the image.
+o Text Extraction: Extracts text content from images using OCR.
+o Scene Description: Generates a textual description of the image.
+Example Python Snippet:
+from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from msrest.authentication import CognitiveServicesCredentials
+endpoint = "https://<your-endpoint>.cognitiveservices.azure.com/"
+key = "<your-key>"
+client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(key))
+image_url = "https://example.com/sample.jpg"
+analysis = client.analyze_image(image_url, visual_features=["Description",
+"Objects"])
+print("Description:", analysis.description.captions[0].text)
+for obj in analysis.objects:
+print("Detected:", obj.object_property)
+Output:
+The system successfully detected multiple objects, extracted embedded text, and generated a natural-
+language description of the scene.
+5.5 Module 4: Video Creation and Analysis using Azure Video
+Indexer
+Objective:
+To analyze videos, extract insights, and generate summaries using Azure’s Video Indexer Service.
+Implementation Steps:
+1. Resource Setup:
+o Created and linked the Azure Video Indexer resource.
+o Uploaded sample videos for analysis.
+2. Integration with Python:
+o Used Azure REST APIs to trigger video analysis and fetch metadata such as scenes,
+transcripts, and emotions.
+3. Features Implemented:
+o Scene Detection: Segmented the video into meaningful scenes.
+o Speech Transcription: Converted speech to text using AI models.
+o Emotion and Face Detection: Identified emotions and people in the video.
+4. Output:
+o Generated detailed JSON metadata describing the video content.
+o Displayed summaries, keywords, and visual highlights extracted automatically by AI.
+5.6 Integration of Modules
+After developing each module independently, they were combined into a unified Python application.
+• The AI Agent handled query routing and intent recognition.
+• The Chatbot served as the primary user interface.
+• The Image Detection and Video Analysis modules were integrated as additional functionalities
+accessible through chatbot commands (e.g., “analyze this image” or “summarize this video”).
+This modular integration demonstrated how different Azure AI Services can collaborate within a single
+intelligent system to deliver comprehensive functionality.
+5.7 Results and Observations
+• The prototypes successfully demonstrated the power of Azure AI and its ease of integration with
+Python.
+• The chatbots and AI agents provided quick, accurate responses with minimal latency.
+• The image and video modules provided meaningful insights with high accuracy.
+• The system architecture ensured scalability, security, and real-time performance.
+5.8 Screens/Outputs (Descriptive)
+• Chatbot Interface: Text box for queries, response window for bot answers.
+• Image Detection Output: JSON and graphical overlays highlighting detected objects.
+• Video Analysis Output: Timeline view with scenes, keywords, and emotions.
+5.9 Summary
+The prototyped module implementations represented a complete AI-powered ecosystem, combining
+multiple Azure services into one integrated solution. The project demonstrated the ability to use cloud
+AI services, REST APIs, and Python programming to build scalable, intelligent, and interactive
+applications.
+Through this practical implementation, participants gained hands-on experience with the full lifecycle of
+AI application development—designing, integrating, testing, and optimizing intelligent systems on the
+Microsoft Azure platform.
+Chapter 6: Future Scope &
+Limitations
+6.1 Overview
+The Summer Training on Azure AI Services, organized by ICT Academy in collaboration with
+Infosys, provided valuable insights into how Artificial Intelligence (AI) and Cloud Computing can be
+used to build intelligent, scalable, and real-time systems. While the training covered key areas such as
+AI agents, chatbot development, image detection, and video analysis using Microsoft Azure, there
+remains significant potential for future enhancement.
+This chapter discusses the future scope of expanding the developed system and the limitations that
+were identified during its design and implementation.
+6.2 Future Scope
+The current prototype developed during the training served as a foundational model for integrating
+various Azure AI services. However, with continuous advancements in AI and cloud technologies, there
+are several opportunities to extend and improve this project in the future.
+1. Integration of Advanced AI Models
+• Future versions can incorporate Generative AI models such as OpenAI’s GPT or Azure
+OpenAI Service to enable more human-like and context-aware responses.
+• Implementing multimodal AI models can allow the system to process and combine text, image,
+and audio inputs for richer interaction.
+2. Speech and Emotion Recognition
+• The chatbot can be enhanced to include speech-to-text and text-to-speech capabilities using
+Azure Speech Services, making interactions more natural and accessible.
+• Emotion recognition from voice or facial expressions can be added to personalize responses
+based on user sentiment.
+3. Real-Time Video Analysis
+• The current system performs video analysis on uploaded files. Future enhancements can enable
+real-time video streaming analysis for applications like surveillance, live event monitoring, and
+video conferencing insights.
+• Integration with Azure Live Video Analytics and Edge AI could improve efficiency for real-
+time data processing.
+4. Integration with IoT Devices
+• The system can be extended to interact with IoT (Internet of Things) devices, enabling smart
+automation systems. For example, image detection could trigger IoT-based actions like
+unlocking doors or adjusting lighting.
+5. Multi-Language and Multicultural Support
+• Using Azure Translator Service, the chatbot can be made multilingual, allowing users from
+different regions to interact in their preferred language.
+• Cultural context adaptation can improve user experience for global deployment.
+6. Advanced Analytics and Visualization
+• A dashboard can be built using Power BI or Azure Synapse Analytics to visualize AI-
+generated data such as chat logs, detected objects, and video summaries.
+• This would help monitor system usage, performance, and insights for business decision-making.
+7. Integration with Enterprise Systems
+• The project can be extended to integrate with CRM, ERP, or HR systems to automate internal
+workflows like customer queries, report generation, or feedback analysis.
+8. Deployment as a Scalable Cloud Application
+• The system can be containerized using Docker and deployed via Azure Kubernetes Service
+(AKS) for large-scale use.
+• With Continuous Integration/Continuous Deployment (CI/CD) pipelines in Azure DevOps,
+updates and improvements can be automated and managed efficiently.
+9. Security and Ethical AI Improvements
+• Future work should focus on implementing advanced AI governance, data privacy, and bias
+detection measures to ensure responsible use of AI.
+• Azure’s Responsible AI dashboard can be integrated to audit model behavior and maintain
+transparency.
+6.3 Limitations
+While the current system effectively demonstrates the core functionality of Azure AI Services, certain
+limitations were observed during its implementation due to technical and resource constraints.
+1. Limited Scope of Training Models
+• The AI models used (LUIS, Computer Vision, etc.) were pre-trained and offered limited
+customization.
+• There was no opportunity to train domain-specific models due to time and data constraints.
+2. Dependence on Internet and Cloud Services
+• Since Azure AI operates in the cloud, the system requires continuous internet connectivity.
+• Any network or service outage can interrupt AI operations.
+3. Restricted Free-Tier Resources
+• The Azure free-tier used during training imposed limits on API calls, storage, and computational
+resources.
+• High-volume tasks like large-scale video analysis or real-time processing could not be tested
+extensively.
+4. Simplified Data Handling
+• The system used static or sample datasets for demonstration.
+• Integration with live or large datasets would require enhanced data management, security, and
+optimization techniques.
+5. Lack of Deep Learning Customization
+• Due to the scope of the training, participants primarily used pre-built AI services rather than
+designing or training deep learning models manually.
+• Future projects could involve model customization using Azure Machine Learning Studio.
+6. Limited Real-Time Processing
+• The prototype processed inputs (text, image, video) asynchronously.
+• Real-time streaming capabilities for video or voice data were not implemented due to time
+limitations.
+7. Minimal UI/UX Design
+• The chatbot and interface were kept minimal for demonstration purposes.
+• Future iterations can include an advanced front-end design with improved interactivity and
+accessibility features.
+8. Cost Constraints for Long-Term Usage
+• Continuous use of Azure services beyond the free tier can become expensive for individual users
+or small teams without sponsorship or institutional support.
+6.4 Summary
+In summary, the prototype system developed during the summer training successfully showcased the
+integration of various Azure AI services into a single intelligent application. While the current version
+meets the objectives of demonstrating AI-based automation, analysis, and communication, there is vast
+potential for future development.
+The future scope highlights the inclusion of advanced AI models, multilingual capabilities, real-time
+analytics, and enterprise integration, which could transform the prototype into a complete, production-
+level solution.
+However, the limitations identified—such as restricted resources, dependence on pre-built services, and
+lack of deep model customization—serve as important learning points for further research and
+development.
+The training thus laid a strong foundation for future exploration in Artificial Intelligence, Cloud
+Computing, and applied data science, encouraging participants to expand their projects into scalable,
+intelligent, and impactful technological solutions.
+Chapter 7: Learning Outcomes
+& Conclusion
+7.1 Overview
+The Summer Training on Azure AI Services, organized by ICT Academy in collaboration with
+Infosys, provided an immersive and industry-oriented learning experience. Through this training,
+participants gained practical exposure to Artificial Intelligence, Cloud Computing, and their applications
+in real-world problem-solving. The program helped bridge the gap between academic learning and
+professional practice by enabling students to work directly with Microsoft Azure AI tools, Python
+programming, and cloud-based deployment models.
+This chapter outlines the key learning outcomes achieved during the training and provides a
+comprehensive conclusion summarizing the entire experience.
+7.2 Learning Outcomes
+The training significantly enhanced both technical and professional competencies. Participants not
+only learned how AI services function on a conceptual level but also implemented them practically to
+design and deploy intelligent systems.
+1. Understanding of Cloud and AI Integration
+• Developed a strong understanding of how Microsoft Azure supports Artificial Intelligence
+development through its scalable, cloud-based infrastructure.
+• Learned how to configure and manage Azure resources, including Cognitive Services, Bot
+Service, and Computer Vision.
+2. Practical Experience with AI Services
+• Gained hands-on experience in using Azure AI Services such as:
+o Cognitive Services for text and language analysis.
+o Azure Bot Service for building conversational chatbots.
+o Computer Vision API for object detection, text extraction, and scene description.
+o Video Indexer for video analysis and automated metadata generation.
+• Learned how to integrate these services into Python-based applications using APIs and SDKs.
+3. Development of Intelligent Chatbots
+• Acquired practical skills in developing chatbots capable of understanding user queries through
+LUIS (Language Understanding Intelligent Service) and responding appropriately using pre-
+defined intents and entities.
+• Understood the architecture of conversational AI systems and their real-world applications in
+customer service, education, and business automation.
+4. Application of Python in AI Workflows
+• Strengthened programming skills by writing Python scripts to interact with Azure AI endpoints,
+process data, and handle responses.
+• Gained knowledge of REST APIs, JSON parsing, and data handling in AI-based environments.
+5. Implementation of Image and Video Analysis
+• Learned how to apply computer vision techniques to extract meaningful information from
+images and videos.
+• Understood how AI models detect, tag, and describe visual content for use in automation,
+content management, and surveillance.
+6. Problem-Solving and Analytical Thinking
+• The training encouraged logical thinking and structured problem-solving by applying AI
+concepts to real-world challenges.
+• Participants developed the ability to analyze problems, design AI-driven solutions, and evaluate
+their efficiency.
+7. Exposure to Industry Practices
+• Understood how large-scale cloud platforms like Microsoft Azure are used in industry to deploy,
+manage, and scale AI applications.
+• Learned about service deployment, scalability, monitoring, and cost management in a
+professional cloud environment.
+8. Collaboration and Communication Skills
+• Improved teamwork and collaboration through group-based project activities.
+• Enhanced presentation and communication abilities while explaining project outcomes and
+technical concepts to peers and mentors.
+9. Awareness of Ethical and Responsible AI
+• Learned about the importance of ethical AI development, including responsible data usage, bias
+prevention, and privacy protection in AI systems.
+• Understood how Azure integrates responsible AI principles into its services and governance
+tools.
+7.3 Key Takeaways
+The training emphasized the following key lessons:
+• AI is not limited to theory; practical implementation using cloud services is essential to
+understanding its true potential.
+• Cloud platforms like Azure simplify AI integration, enabling faster development and scalability.
+• Collaboration between academia and industry (through ICT Academy and Infosys) creates an
+environment that fosters skill enhancement and innovation.
+• The combination of Python and Azure AI Services provides a powerful toolkit for developing
+intelligent, automated, and data-driven applications.
+7.4 Challenges Faced and How They Were Overcome
+• Challenge: Limited familiarity with Azure cloud tools at the beginning.
+o Solution: Step-by-step guided tutorials and practical demonstrations helped participants
+quickly adapt.
+• Challenge: Managing multiple services and API integrations simultaneously.
+o Solution: Proper documentation, code modularization, and systematic debugging
+techniques were applied.
+• Challenge: Limited free-tier resources.
+o Solution: Efficient use of available credits and selection of lightweight testing datasets.
+7.5 Conclusion
+The Summer Training on Azure AI Services was a comprehensive and transformative learning
+experience. It successfully combined theoretical understanding with hands-on practical application,
+allowing participants to explore the core areas of Artificial Intelligence and Cloud Computing.
+Through this training, students learned how to:
+• Develop and deploy intelligent chatbots using Azure Bot Framework and Python.
+• Implement image detection and video analysis using Azure’s Cognitive Services.
+• Integrate multiple AI tools into a single, cohesive cloud-based system.
+• Apply AI-driven automation to solve real-world problems.
+The collaboration between ICT Academy and Infosys ensured that the training aligned with current
+industry trends and technologies. It exposed participants to enterprise-level tools and workflows,
+enhancing their employability and technical readiness for future opportunities.
+In conclusion, this training program strengthened participants’ foundational understanding of AI,
+encouraged creative application of cloud technologies, and inspired confidence to pursue careers in
+Artificial Intelligence, Data Science, and Cloud Application Development. It marked an important
+step toward becoming future-ready professionals in the evolving digital landscape.
+Chapter 8: Bibliography
+The following references and resources were consulted and utilized during the Summer Training on
+Azure AI Services, organized by ICT Academy in collaboration with Infosys. These materials
+provided theoretical understanding, technical guidance, and practical examples for developing the AI-
+based projects using Microsoft Azure and Python.
+Books and Study Materials
+1. Microsoft Azure Documentation — Microsoft Corporation.
+https://learn.microsoft.com/en-us/azure
+2. Artificial Intelligence: A Modern Approach by Stuart Russell and Peter Norvig, Pearson
+Education.
+3. Python Machine Learning by Sebastian Raschka and Vahid Mirjalili, Packt Publishing.
+4. Hands-On Artificial Intelligence with Azure Cognitive Services by Nishith Pathak, Apress
+Publications.
+5. Deep Learning with Python by François Chollet, Manning Publications.
+Online References and Documentation
+1. Azure Cognitive Services Overview — Microsoft Learn.
+https://learn.microsoft.com/en-us/azure/cognitive-services
+2. Azure Bot Service and Language Understanding (LUIS) Documentation — Microsoft Learn.
+https://learn.microsoft.com/en-us/azure/bot-service
+https://learn.microsoft.com/en-us/azure/cognitive-services/luis
+3. Azure Computer Vision API — Reference Guide.
+https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision
+4. Azure Video Indexer Documentation.
+https://learn.microsoft.com/en-us/azure/azure-video-indexer
+5. Azure AI Services SDK for Python.
+https://learn.microsoft.com/en-us/python/api/overview/azure/ai
+6. Azure Machine Learning and Cognitive API References.
+https://learn.microsoft.com/en-us/azure/machine-learning/
+Tutorials and Articles
+1. “Getting Started with Microsoft Azure AI Services” — GeeksforGeeks.
+https://www.geeksforgeeks.org/microsoft-azure-ai-services
+2. “Building Chatbots with Azure Bot Service and Python” — Medium Technical Blogs.
+https://medium.com
+3. “Image Recognition using Azure Computer Vision and Python” — Towards Data Science.
+https://towardsdatascience.com
+4. “Video Analytics and Indexing with Azure Cognitive Services” — Analytics Vidhya.
+https://www.analyticsvidhya.com
+Training and Course Material
+1. ICT Academy – Summer Training Handbook on Azure AI Services.
+2. Infosys Springboard – AI and Cloud Fundamentals Course Notes.
+3. Microsoft Learn AI Fundamentals Path — AI-900 Certification Learning Modules.
+https://learn.microsoft.com/en-us/training/paths/get-started-with-artificial-intelligence-on-azure/
+Software and Tools Used
+1. Microsoft Azure Portal — for AI service configuration and management.
+2. Visual Studio Code — for Python development and debugging.
+3. Postman — for testing REST APIs.
+4. Jupyter Notebook — for AI model experimentation.
+5. Microsoft Teams / Web Chat Emulator — for chatbot testing.
+Acknowledged Resources
+Special acknowledgment to:
+• ICT Academy & Infosys training coordinators for providing structured learning material and
+project guidance.
+• Microsoft Learn Community and Azure Technical Documentation Team for their
+comprehensive tutorials and examples.
+Note:
+All external resources mentioned above were used strictly for educational and non-commercial purposes
+as part of the summer training program on Azure AI Services.
+Chapter 9: Appendix
+The appendix provides supplementary information, supporting materials, and technical details that
+complement the content of the Summer Training Report on Azure AI Services, organized by ICT
+Academy in collaboration with Infosys. It includes screenshots, code snippets, configuration details,
+and other artifacts developed during the training to demonstrate the practical aspects of the project.
+9.1 Project Overview
+Title: Intelligent AI Assistant using Microsoft Azure AI Services
+Technology Stack:
+• Programming Language: Python (3.8+)
+• Cloud Platform: Microsoft Azure
+• Tools & Frameworks: Azure Cognitive Services, Azure Bot Service, LUIS, Azure Computer
+Vision, Azure Video Indexer
+• IDE: Visual Studio Code / Jupyter Notebook
+• APIs: REST APIs & Azure SDK for Python
+Modules Implemented:
+1. AI Agent using Azure Cognitive Services
+2. Chatbot using Azure Bot Service and Python
+3. Image Detection using Computer Vision API
+4. Video Analysis and Summarization using Azure Video Indexer
+9.2 Azure Service Configuration Details
+1. Cognitive Services Setup
+• Resource Group: AI-Training-Group
+• Resource Type: Cognitive Services
+• Region: Central India
+• Key Parameters: Endpoint URL, Subscription Key
+• Services Used: Text Analytics, Language Understanding (LUIS), Computer Vision
+2. Bot Service Configuration
+• Created a new Azure Bot Service via Azure Portal.
+• Connected it with Language Understanding Service (LUIS).
+• Configured communication channel (Web Chat / Emulator).
+• Integrated Flask backend for message routing and response.
+3. Computer Vision Configuration
+• Resource Type: Computer Vision API
+• Features Enabled: Object Detection, OCR, Scene Description
+• Testing Tool: Postman and Python SDK
+4. Video Indexer Configuration
+• Resource Type: Azure Video Indexer
+• Functionality: Scene detection, speech-to-text, emotion recognition
+• Output Format: JSON metadata file
+9.3 Sample Code Snippets
+(A) Chatbot Backend (Python + Flask)
+from flask import Flask, request, jsonify
+import requests
+app = Flask(__name__)
+LUIS_ENDPOINT = "https://<your-luis-endpoint>/luis/prediction/v3.0/apps/<app-
+id>?subscription-key=<key>&query="
+@app.route('/chat', methods=['POST'])
+def chat():
+user_input = request.json.get("message")
+response = requests.get(LUIS_ENDPOINT + user_input)
+intent = response.json()['prediction']['topIntent']
+return jsonify({"intent": intent, "response": f"Intent detected: {intent}"})
+if __name__ == '__main__':
+app.run(debug=True)
+(B) Image Detection (Azure Computer Vision API)
+from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from msrest.authentication import CognitiveServicesCredentials
+endpoint = "https://<your-endpoint>.cognitiveservices.azure.com/"
+key = "<your-key>"
+client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(key))
+image_url = "https://example.com/sample.jpg"
+analysis = client.analyze_image(image_url, visual_features=["Objects",
+"Description"])
+print("Description:", analysis.description.captions[0].text)
+for obj in analysis.objects:
+print("Detected:", obj.object_property)
+(C) Video Analysis using Azure Video Indexer API
+import requests
+account_id = "<your-account-id>"
+access_token = "<access-token>"
+video_url = "<video-file-url>"
+headers = {'Authorization': f'Bearer {access_token}'}
+upload_url =
+f"https://api.videoindexer.ai/trial/Accounts/{account_id}/Videos?name=SampleVideo&v
+ideoUrl={video_url}"
+response = requests.post(upload_url, headers=headers)
+print("Upload Status:", response.status_code)
+9.4 Screenshot:
+9.5 Hardware and Software Requirements
+Hardware Requirements:
+• Processor: Intel i5 or above
+• RAM: 8 GB minimum
+• Storage: 20 GB free space
+• Internet Connection: Minimum 2 Mbps for cloud operations
+Software Requirements:
+• Windows 10 / 11 or Linux OS
+• Python 3.8+
+• Visual Studio Code or PyCharm IDE
+• Microsoft Azure Subscription (Student/Free Tier)
+• Postman for API Testing
+• Browser: Microsoft Edge / Chrome
+9.6 Training Details
+Parameter Description
+Training Organization ICT Academy (in collaboration with Infosys)
+Training Duration 4 Weeks
+Mode of Training Online / Instructor-led Sessions
+Tools Used Microsoft Azure Portal, Python, Visual Studio Code
+Focus Areas Azure AI Services, Cognitive Computing, Chatbot Development, Image & Video Analysis
+Final Project AI-powered Chatbot and Image-Video Detection Application
+9.7 Certificates and Acknowledgements
+• Certificate of Completion: Summer Training on Azure AI Services – ICT Academy & Infosys.
+• Appreciation from Instructor: For successful completion and implementation of the final AI
+project.
+9.8 Summary
+The appendix consolidates all supporting data, configurations, and evidence of work completed during
+the training. It reflects the technical depth and practical experience gained in using Azure AI Services
+for developing intelligent systems.
+These artifacts serve as proof of successful implementation, testing, and understanding of AI-driven
+cloud solutions—the central goal of this summer training program

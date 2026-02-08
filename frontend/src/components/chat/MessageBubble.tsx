@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bot, User, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import * as React from "react";
+import ReactMarkdown from "react-markdown";
 
 export interface Message {
   id: string;
@@ -57,11 +58,24 @@ export const MessageBubble = React.forwardRef<HTMLDivElement, MessageBubbleProps
       <div className={cn("max-w-[85%] sm:max-w-[75%] space-y-1 sm:space-y-2", !isAgent && "order-first")}>
         <div
           className={cn(
-            "px-3 py-2 sm:px-4 sm:py-3 text-sm",
-            isAgent ? "agent-bubble" : "user-bubble"
+            "px-3 py-2 sm:px-4 sm:py-3 text-sm overflow-hidden",
+            isAgent ? "agent-bubble prose prose-sm dark:prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0" : "user-bubble"
           )}
         >
-          {message.content}
+          {isAgent ? (
+            <ReactMarkdown components={{
+              // Override paragraph to avoid extra margins if needed, though prose handles it
+              p: ({children}) => <p className="mb-1 last:mb-0">{children}</p>,
+              ul: ({children}) => <ul className="list-disc pl-4 mb-1 last:mb-0">{children}</ul>,
+              ol: ({children}) => <ol className="list-decimal pl-4 mb-1 last:mb-0">{children}</ol>,
+              li: ({children}) => <li className="my-0.5">{children}</li>,
+              a: ({href, children}) => <a href={href} target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">{children}</a>
+            }}>
+              {message.content}
+            </ReactMarkdown>
+          ) : (
+            message.content
+          )}
         </div>
 
         {showMeta && isAgent && (

@@ -14,20 +14,33 @@ class IngestionService:
         self, 
         file: UploadFile, 
         provider_config: dict, 
-        user: UserContext
+        user: UserContext,
+        document_id: Optional[str] = None
     ):
-        # 1. Create Document Record
-        doc_entry = {
-            "name": file.filename,
-            "file_type": file.filename.split('.')[-1] if '.' in file.filename else "txt",
-            "company_id": user.company_id,
-            "status": "pending",
-            "metadata": {"uploaded_by": user.user_id}
-        }
-        res = self.supabase.table("knowledge_documents").insert(doc_entry).execute()
-        if not res.data:
-            raise Exception("Failed to create document record")
-        document_id = res.data[0]['id']
+        # 1. Create or Get Document Record
+        if document_id:
+             # Verify ownership
+             res = self.supabase.table("knowledge_documents").select("id").eq("id", document_id).eq("company_id", user.company_id).execute()
+             if not res.data:
+                 raise Exception("Document not found or access denied")
+             
+             # Update status to pending
+             self.supabase.table("knowledge_documents").update({
+                 "status": "pending",
+                 "metadata": {"uploaded_by": user.user_id, "retry": True}
+             }).eq("id", document_id).execute()
+        else:
+            doc_entry = {
+                "name": file.filename,
+                "file_type": file.filename.split('.')[-1] if '.' in file.filename else "txt",
+                "company_id": user.company_id,
+                "status": "pending",
+                "metadata": {"uploaded_by": user.user_id}
+            }
+            res = self.supabase.table("knowledge_documents").insert(doc_entry).execute()
+            if not res.data:
+                raise Exception("Failed to create document record")
+            document_id = res.data[0]['id']
 
         try:
             # 2. Process File

@@ -87,6 +87,7 @@ def health_check():
 async def ingest(
     file: UploadFile = File(...),
     provider_config: Optional[str] = Form(None), # JSON string
+    document_id: Optional[str] = Form(None),
     user: UserContext = Depends(get_current_user)
 ):
     """
@@ -104,7 +105,7 @@ async def ingest(
     config = get_provider_config(user_config_dict)
     
     service = IngestionService(supabase)
-    return await service.ingest_file(file, config, user)
+    return await service.ingest_file(file, config, user, document_id)
 
 @app.post("/chat")
 async def chat(

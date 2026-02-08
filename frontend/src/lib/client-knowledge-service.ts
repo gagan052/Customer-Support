@@ -55,8 +55,20 @@ export async function processDocument(documentId: string) {
     // 3. Send to Python Backend
     const formData = new FormData();
     formData.append("file", fileBlob, doc.name);
-    formData.append("provider", provider);
-    // formData.append("api_key", apiKey); // No longer needed
+    
+    // Construct provider_config with API Key from client settings if available
+    // This handles the case where the user uses BYO Key in Settings page
+    // but hasn't set it in the backend Env Vars.
+    const apiKey = provider === 'gemini' ? getGeminiKey() : getOpenAIKey();
+    const providerConfig = {
+        embedding_provider: provider,
+        embedding_api_key: apiKey,
+        vector_provider: "supabase", // Default to Supabase unless Pinecone env var is set on backend
+        // We can't know backend env vars here, but backend will merge this config.
+        // If user provided a key in Settings, we must send it.
+    };
+    
+    formData.append("provider_config", JSON.stringify(providerConfig));
     formData.append("document_id", documentId);
     
     // Get Session Token for RLS

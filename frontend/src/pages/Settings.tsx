@@ -138,9 +138,9 @@ export default function SettingsPage() {
 
   return (
     <MainLayout>
-      <div className="p-6 space-y-6 max-w-4xl">
+      <div className="p-4 md:p-6 space-y-6 max-w-4xl">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <SettingsIcon className="w-6 h-6 text-accent" />
@@ -148,7 +148,7 @@ export default function SettingsPage() {
             </h1>
             <p className="text-muted-foreground">Configure your AI Support Agent</p>
           </div>
-          <Button variant="accent" onClick={handleSave} disabled={updateProfileMutation.isPending}>
+          <Button variant="accent" onClick={handleSave} disabled={updateProfileMutation.isPending} className="w-full sm:w-auto">
             {updateProfileMutation.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Save className="w-4 h-4 mr-2" />}
             Save Changes
           </Button>
@@ -171,7 +171,7 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                    <div className="space-y-2">
                       <Label>Display Name</Label>
                       <Input 
@@ -216,7 +216,7 @@ export default function SettingsPage() {
                   <RadioGroup 
                     value={activeProvider} 
                     onValueChange={(val: "openai" | "gemini") => setActiveProvider(val)}
-                    className="grid grid-cols-2 gap-4"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4"
                   >
                     <div>
                       <RadioGroupItem value="openai" id="openai" className="peer sr-only" />

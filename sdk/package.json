@@ -1,0 +1,16 @@
+{
+  "name": "@rag-platform/sdk",
+  "version": "1.0.0",
+  "description": "Client SDK for Enterprise RAG Platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": ["rag", "ai", "sdk"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

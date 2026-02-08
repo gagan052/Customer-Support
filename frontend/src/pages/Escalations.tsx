@@ -99,7 +99,7 @@ export default function EscalationsPage() {
     <MainLayout>
       <div className="p-6 space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <AlertTriangle className="w-6 h-6 text-warning" />
@@ -107,7 +107,7 @@ export default function EscalationsPage() {
             </h1>
             <p className="text-muted-foreground">Tickets requiring human intervention</p>
           </div>
-          <Badge variant="destructive" className="text-sm px-3 py-1">
+          <Badge variant="destructive" className="text-sm px-3 py-1 w-fit">
             {escalatedConversations.length} Active
           </Badge>
         </div>
@@ -116,7 +116,7 @@ export default function EscalationsPage() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-warning/10 border border-warning/30 rounded-xl p-4 flex items-center gap-4"
+          className="bg-warning/10 border border-warning/30 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4"
         >
           <AlertCircle className="w-8 h-8 text-warning flex-shrink-0" />
           <div className="flex-1">
@@ -125,7 +125,7 @@ export default function EscalationsPage() {
               {escalatedConversations.length} customers with negative or complex issues are waiting.
             </p>
           </div>
-          <Button variant="warning" size="sm">
+          <Button variant="warning" size="sm" className="w-full sm:w-auto">
             <Phone className="w-4 h-4 mr-2" />
             Start Handling
           </Button>
@@ -143,26 +143,26 @@ export default function EscalationsPage() {
               <Card className={`glass-card border-l-4 ${
                 conv.priority === "high" ? "border-l-destructive" : "border-l-warning"
               }`}>
-                <CardContent className="p-5">
-                  <div className="flex items-start justify-between gap-4">
+                <CardContent className="p-4 sm:p-5">
+                  <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                     {/* User Info */}
-                    <div className="flex items-start gap-4 flex-1">
+                    <div className="flex flex-col sm:flex-row items-start gap-4 flex-1 w-full">
                       <div className="w-12 h-12 rounded-full bg-destructive/20 flex items-center justify-center flex-shrink-0">
                         <Frown className="w-6 h-6 text-destructive" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-semibold">{conv.user.name}</h3>
+                      <div className="flex-1 min-w-0 w-full">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <h3 className="font-semibold truncate">{conv.user.name}</h3>
                           <Badge variant={conv.priority === "high" ? "destructive" : "pending"} className="text-[10px]">
                             {conv.priority} priority
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-2">{conv.user.email}</p>
-                        <p className="text-sm bg-secondary/50 rounded-lg p-3 italic">
+                        <p className="text-sm text-muted-foreground mb-2 truncate">{conv.user.email}</p>
+                        <p className="text-sm bg-secondary/50 rounded-lg p-3 italic break-words">
                           "{conv.preview}"
                         </p>
                         
-                        <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-muted-foreground">
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-3 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <AlertTriangle className="w-3 h-3 text-warning" />
                             {conv.reason}
@@ -180,18 +180,20 @@ export default function EscalationsPage() {
                     </div>
 
                     {/* Stats & Actions */}
-                    <div className="flex flex-col items-end gap-3 flex-shrink-0">
-                      <div className="text-right">
+                    <div className="flex flex-row md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-3 flex-shrink-0 border-t md:border-t-0 pt-3 md:pt-0 mt-2 md:mt-0">
+                      <div className="text-left md:text-right">
                         <p className="text-xs text-muted-foreground">AI Confidence</p>
                         <p className="text-2xl font-bold text-destructive">{Math.round(conv.confidence * 100)}%</p>
                       </div>
-                      <Badge variant={conv.sentiment as any} className="text-[10px]">
-                        {conv.sentiment} sentiment
-                      </Badge>
-                      <Button variant="accent" size="sm">
-                        Take Over
-                        <ArrowRight className="w-3 h-3 ml-1" />
-                      </Button>
+                      <div className="flex items-center gap-2 md:flex-col md:items-end">
+                        <Badge variant={conv.sentiment as any} className="text-[10px]">
+                          {conv.sentiment} sentiment
+                        </Badge>
+                        <Button variant="accent" size="sm" className="whitespace-nowrap">
+                          Take Over
+                          <ArrowRight className="w-3 h-3 ml-1" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>

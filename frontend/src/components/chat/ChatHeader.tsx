@@ -43,8 +43,8 @@ export function ChatHeader({
       <div className="flex items-center gap-2">
         {onEscalate && (
           <Button variant="outline" size="sm" onClick={onEscalate} className="text-xs">
-            <Phone className="w-3.5 h-3.5 mr-1.5" />
-            Talk to Human
+            <Phone className="w-3.5 h-3.5 sm:mr-1.5" />
+            <span className="hidden sm:inline">Talk to Human</span>
           </Button>
         )}
         <Button variant="ghost" size="icon-sm">

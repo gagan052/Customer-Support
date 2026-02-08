@@ -42,22 +42,22 @@ export const MessageBubble = React.forwardRef<HTMLDivElement, MessageBubbleProps
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className={cn(
-        "flex gap-3 px-4 py-2",
+        "flex gap-2 sm:gap-3 px-2 sm:px-4 py-2",
         isAgent ? "justify-start" : "justify-end"
       )}
     >
       {isAgent && (
         <div className="flex-shrink-0">
-          <div className="w-9 h-9 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center">
-            <Bot className="w-5 h-5 text-accent" />
+          <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center">
+            <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
           </div>
         </div>
       )}
 
-      <div className={cn("max-w-[75%] space-y-2", !isAgent && "order-first")}>
+      <div className={cn("max-w-[85%] sm:max-w-[75%] space-y-1 sm:space-y-2", !isAgent && "order-first")}>
         <div
           className={cn(
-            "px-4 py-3 text-sm",
+            "px-3 py-2 sm:px-4 sm:py-3 text-sm",
             isAgent ? "agent-bubble" : "user-bubble"
           )}
         >
@@ -65,7 +65,7 @@ export const MessageBubble = React.forwardRef<HTMLDivElement, MessageBubbleProps
         </div>
 
         {showMeta && isAgent && (
-          <div className="flex flex-wrap items-center gap-2 px-1">
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2 px-1">
             {message.confidence !== undefined && (
               <Badge variant={getConfidenceBadge(message.confidence).variant} className="text-[10px]">
                 {Math.round(message.confidence * 100)}% {getConfidenceBadge(message.confidence).label}

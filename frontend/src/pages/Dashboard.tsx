@@ -154,14 +154,14 @@ export default function DashboardPage() {
 
   return (
     <MainLayout>
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold">Dashboard</h1>
             <p className="text-muted-foreground">Real-time AI Agent performance</p>
           </div>
-          <Button variant="accent" onClick={() => window.location.href = '/settings'}>
+          <Button variant="accent" onClick={() => window.location.href = '/settings'} className="w-full sm:w-auto">
             <Zap className="w-4 h-4 mr-2" />
             Agent Settings
           </Button>
@@ -214,20 +214,20 @@ export default function DashboardPage() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="flex items-center justify-between p-3 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors cursor-pointer"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors cursor-pointer gap-3 sm:gap-4"
                   >
-                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="flex items-center gap-3 flex-1 min-w-0 w-full">
                       <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
                         <span className="text-xs font-medium text-accent">
                           {conv.user.split(" ").map(n => n[0]).join("")}
                         </span>
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="font-medium text-sm">{conv.user}</p>
+                        <p className="font-medium text-sm truncate">{conv.user}</p>
                         <p className="text-sm text-muted-foreground truncate">{conv.preview}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3 flex-shrink-0">
+                    <div className="flex items-center justify-between sm:justify-end gap-3 flex-shrink-0 w-full sm:w-auto">
                       <Badge 
                         variant={
                           conv.status === "resolved" ? "resolved" :
@@ -237,7 +237,7 @@ export default function DashboardPage() {
                       >
                         {conv.status}
                       </Badge>
-                      <div className="text-right">
+                      <div className="text-right flex items-center gap-3 sm:block">
                         <p className="text-xs font-medium">{Math.round(conv.confidence * 100)}%</p>
                         <p className="text-[10px] text-muted-foreground">{conv.time}</p>
                       </div>

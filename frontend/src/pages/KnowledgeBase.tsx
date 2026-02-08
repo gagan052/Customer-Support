@@ -243,9 +243,9 @@ export default function KnowledgeBasePage() {
 
   return (
     <MainLayout>
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <BookOpen className="w-6 h-6 text-accent" />
@@ -253,12 +253,12 @@ export default function KnowledgeBasePage() {
             </h1>
             <p className="text-muted-foreground">Manage documents for RAG retrieval</p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline" onClick={() => document.getElementById('search-input')?.focus()}>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button variant="outline" className="w-full sm:w-auto" onClick={() => document.getElementById('search-input')?.focus()}>
               <Search className="w-4 h-4 mr-2" />
               Search
             </Button>
-            <Button onClick={() => fileInputRef.current?.click()} disabled={uploadMutation.isPending}>
+            <Button className="w-full sm:w-auto" onClick={() => fileInputRef.current?.click()} disabled={uploadMutation.isPending}>
               {uploadMutation.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Upload className="w-4 h-4 mr-2" />}
               Upload Document
             </Button>
@@ -273,7 +273,7 @@ export default function KnowledgeBasePage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {(stats || [
             { label: "Total Documents", value: "0" },
             { label: "Total Chunks", value: "0" },
@@ -289,7 +289,7 @@ export default function KnowledgeBasePage() {
               <Card className="glass-card">
                 <CardContent className="p-4">
                   <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  <p className="text-2xl font-bold mt-1">{stat.value}</p>
+                  <p className="text-2xl font-bold mt-1 break-words">{stat.value}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -297,7 +297,7 @@ export default function KnowledgeBasePage() {
         </div>
 
         {/* Search & Filter */}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input 
@@ -308,7 +308,7 @@ export default function KnowledgeBasePage() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <Button variant="outline">
+          <Button variant="outline" className="w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
             Add Folder
           </Button>
@@ -320,34 +320,34 @@ export default function KnowledgeBasePage() {
             <CardTitle>Documents</CardTitle>
             <CardDescription>Manage your indexed content</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 sm:p-6">
             {docsLoading ? (
                <div className="flex justify-center py-8">
                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
                </div>
             ) : (
-              <div className="space-y-1">
+              <div className="space-y-3">
                 {documents?.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-secondary/50 transition-colors group cursor-pointer"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-lg hover:bg-secondary/50 transition-colors group cursor-pointer border sm:border-transparent gap-3"
                     onClick={() => handleEditClick(item)}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+                    <div className="flex items-start sm:items-center gap-3 w-full sm:w-auto">
+                      <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent flex-shrink-0">
                         {item.file_type?.includes('folder') ? <Folder className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
                       </div>
-                      <div>
-                        <p className="font-medium">{item.name}</p>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium truncate">{item.name}</p>
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mt-1 sm:mt-0">
                           <span>{item.chunk_count || 0} chunks</span>
-                          <span>•</span>
+                          <span className="hidden sm:inline">•</span>
                           <span>{formatDistanceToNow(new Date(item.updated_at), { addSuffix: true })}</span>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
                       <Badge 
                         variant="outline" 
                         className={
@@ -360,7 +360,7 @@ export default function KnowledgeBasePage() {
                         {item.status}
                       </Badge>
                       
-                      <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                         <Button size="icon" variant="ghost" className="h-8 w-8" onClick={(e) => { e.stopPropagation(); handleEditClick(item); }}>
                           <Edit className="w-4 h-4" />
                         </Button>

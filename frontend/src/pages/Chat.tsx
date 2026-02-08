@@ -82,7 +82,7 @@ export default function ChatPage() {
 
   return (
     <MainLayout>
-      <div className="h-screen flex flex-col">
+      <div className="h-[100dvh] flex flex-col">
         <ChatHeader onEscalate={handleEscalate} />
         
         <ScrollArea className="flex-1" ref={scrollRef}>

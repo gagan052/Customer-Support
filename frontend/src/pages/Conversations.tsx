@@ -93,28 +93,28 @@ export default function ConversationsPage() {
 
   return (
     <MainLayout>
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold">Conversations</h1>
             <p className="text-muted-foreground">All customer interactions</p>
           </div>
-          <div className="flex gap-2">
-            <Badge variant="resolved" className="px-3 py-1">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+            <Badge variant="resolved" className="px-3 py-1 whitespace-nowrap">
               {conversations.filter(c => c.status === "resolved").length} Resolved
             </Badge>
-            <Badge variant="pending" className="px-3 py-1">
+            <Badge variant="pending" className="px-3 py-1 whitespace-nowrap">
               {conversations.filter(c => c.status === "pending").length} Pending
             </Badge>
-            <Badge variant="escalated" className="px-3 py-1">
+            <Badge variant="escalated" className="px-3 py-1 whitespace-nowrap">
               {conversations.filter(c => c.status === "escalated").length} Escalated
             </Badge>
           </div>
         </div>
 
         {/* Search and Filter */}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
@@ -124,14 +124,14 @@ export default function ConversationsPage() {
               className="pl-10"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
             {(["all", "resolved", "pending", "escalated"] as const).map(f => (
               <Button
                 key={f}
                 variant={filter === f ? "accent" : "outline"}
                 size="sm"
                 onClick={() => setFilter(f)}
-                className="capitalize"
+                className="capitalize whitespace-nowrap"
               >
                 {f}
               </Button>
@@ -196,7 +196,7 @@ export default function ConversationsPage() {
 
                   {/* Stats */}
                   <div className="text-right flex-shrink-0">
-                    <p className={`text-lg font-bold ${
+                    <p className={`text-lg font-bold hidden sm:block ${
                       conv.confidence >= 0.85 ? "text-success" :
                       conv.confidence >= 0.6 ? "text-warning" : "text-destructive"
                     }`}>

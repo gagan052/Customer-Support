@@ -31,9 +31,9 @@ export function ChatInput({ onSend, disabled, placeholder = "Type your message..
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 border-t border-border bg-card/80 backdrop-blur-lg"
+      className="p-3 sm:p-4 border-t border-border bg-card/80 backdrop-blur-lg sticky bottom-0 z-10"
     >
-      <div className="flex items-end gap-3">
+      <div className="flex items-end gap-2 sm:gap-3">
         <div className="flex-1 relative">
           <Textarea
             value={message}
@@ -73,7 +73,7 @@ export function ChatInput({ onSend, disabled, placeholder = "Type your message..
           <Send className="w-4 h-4" />
         </Button>
       </div>
-      <p className="text-[10px] text-muted-foreground text-center mt-2">
+      <p className="hidden sm:block text-[10px] text-muted-foreground text-center mt-2">
         Press Enter to send • Shift + Enter for new line
       </p>
     </motion.div>

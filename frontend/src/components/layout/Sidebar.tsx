@@ -9,7 +9,8 @@ import {
   BarChart3,
   Zap,
   AlertTriangle,
-  HelpCircle
+  HelpCircle,
+  FileText
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -17,16 +18,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { startOfDay } from "date-fns";
 
 const navigation = [
-  { name: "Chat", href: "/", icon: MessageSquare },
+  { name: "Chat", href: "/chat", icon: MessageSquare },
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Conversations", href: "/conversations", icon: Users },
   { name: "Escalations", href: "/escalations", icon: AlertTriangle },
   { name: "Knowledge Base", href: "/knowledge", icon: BookOpen },
   { name: "Analytics", href: "/analytics", icon: BarChart3 },
+  { name: "Documentation", href: "/documentation", icon: FileText },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
-export function Sidebar() {
+export function SidebarContent() {
   const location = useLocation();
 
   const { data: sidebarStats } = useQuery({
@@ -61,11 +63,7 @@ export function Sidebar() {
   });
 
   return (
-    <motion.aside
-      initial={{ x: -80, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      className="w-64 bg-sidebar border-r border-sidebar-border flex flex-col h-screen fixed left-0 top-0"
-    >
+    <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="p-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
@@ -137,6 +135,18 @@ export function Sidebar() {
           Help & Documentation
         </button>
       </div>
+    </div>
+  );
+}
+
+export function Sidebar() {
+  return (
+    <motion.aside
+      initial={{ x: -80, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      className="hidden md:flex w-64 bg-sidebar border-r border-sidebar-border flex-col h-screen fixed left-0 top-0"
+    >
+      <SidebarContent />
     </motion.aside>
   );
 }

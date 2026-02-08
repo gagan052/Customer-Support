@@ -4,6 +4,8 @@ from typing import Optional
 from supabase import Client, create_client
 import os
 import hashlib
+from postgrest.exceptions import APIError
+from utils import get_supabase_client
 
 # Initialize Supabase client for Auth (Service Role for checking keys)
 supabase_url = os.getenv("SUPABASE_URL") or os.getenv("VITE_SUPABASE_URL")
@@ -19,6 +21,7 @@ class UserContext(BaseModel):
     user_id: str
     company_id: str
     role: str
+    token: Optional[str] = None
 
 async def get_current_user(
     x_api_key: Optional[str] = Header(None, alias="x-api-key"),
@@ -47,24 +50,27 @@ async def get_current_user(
     if authorization:
         token = authorization.split(" ")[1]
         user_res = supabase.auth.get_user(token)
-        
         if not user_res.user:
             raise HTTPException(status_code=401, detail="Invalid Token")
-            
         user_id = user_res.user.id
-        
-        # Fetch profile to get company_id
-        profile_res = supabase.table("user_profiles").select("company_id, role").eq("user_id", user_id).execute()
-        
-        if not profile_res.data:
-             raise HTTPException(status_code=403, detail="User has no profile/company")
-             
-        profile = profile_res.data[0]
-        
+        client = get_supabase_client(supabase_url, supabase_key, token)
+        try:
+            profile_res = client.table("user_profiles").select("company_id, role").eq("user_id", user_id).execute()
+            if profile_res.data:
+                profile = profile_res.data[0]
+                return UserContext(
+                    user_id=user_id,
+                    company_id=profile.get("company_id") or user_id,
+                    role=profile.get("role", "employee"),
+                    token=token
+                )
+        except APIError:
+            pass
         return UserContext(
             user_id=user_id,
-            company_id=profile["company_id"],
-            role=profile["role"]
+            company_id=user_id,
+            role="owner",
+            token=token
         )
 
     raise HTTPException(status_code=401, detail="Missing Authentication")

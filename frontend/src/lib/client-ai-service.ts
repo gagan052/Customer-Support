@@ -275,24 +275,30 @@ async function sendMessageToBackend(message: string, sessionId: string, conversa
     
     // Parse nested JSON in response field
     let parsedContent;
-    try {
-        let cleanContent = result.response;
-        if (cleanContent.includes("```json")) {
-            cleanContent = cleanContent.replace(/```json\n?|\n?```/g, "");
-        } else if (cleanContent.includes("```")) {
-            cleanContent = cleanContent.replace(/```\n?|\n?```/g, "");
+    
+    // Check if response is already an object (Python backend might return dict)
+    if (typeof result.response === 'object' && result.response !== null) {
+        parsedContent = result.response;
+    } else {
+        try {
+            let cleanContent = result.response;
+            if (cleanContent.includes("```json")) {
+                cleanContent = cleanContent.replace(/```json\n?|\n?```/g, "");
+            } else if (cleanContent.includes("```")) {
+                cleanContent = cleanContent.replace(/```\n?|\n?```/g, "");
+            }
+            parsedContent = JSON.parse(cleanContent);
+        } catch (e) {
+            console.warn("Failed to parse backend JSON response, using raw text", e);
+            parsedContent = {
+                content: result.response,
+                intent: "general_query",
+                confidence: 0.8,
+                sentiment: "neutral",
+                action: "resolve",
+                reasoning: "Processed by Backend (Unstructured)"
+            };
         }
-        parsedContent = JSON.parse(cleanContent);
-    } catch (e) {
-        console.warn("Failed to parse backend JSON response, using raw text", e);
-        parsedContent = {
-            content: result.response,
-            intent: "general_query",
-            confidence: 0.8,
-            sentiment: "neutral",
-            action: "resolve",
-            reasoning: "Processed by Backend (Unstructured)"
-        };
     }
 
     return {

@@ -15,7 +15,7 @@ import { supabase } from "@/integrations/supabase/client";
 // Quick replies for common user actions
 const quickReplies = [
   "How do I reset my password?",
-  "I need help with my bill",
+  "what is the name of HOD",
   "Something isn't working",
   "I have a feature suggestion",
   "I want to request a refund",

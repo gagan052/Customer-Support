@@ -104,7 +104,7 @@ export default function SettingsPage() {
       setActiveProvider(storedProvider);
     } else {
       // Auto-detect preference if not set
-      if (storedGeminiKey && !storedKey) setActiveProvider("gemini");
+      if (storedGeminiKey) setActiveProvider("gemini");
     }
   }, []);
 

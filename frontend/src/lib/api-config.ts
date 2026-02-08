@@ -29,8 +29,8 @@ export function getActiveProvider(): 'openai' | 'gemini' {
     return provider;
   }
   
-  // Auto-detect: if Gemini key exists but OpenAI doesn't, use Gemini
-  if (getGeminiKey() && !getOpenAIKey()) {
+  // Auto-detect: if Gemini key exists, prefer it (as it has a generous free tier)
+  if (getGeminiKey()) {
     return 'gemini';
   }
   

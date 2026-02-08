@@ -1,10 +1,10 @@
+import os
 from fastapi import UploadFile
-from typing import Optional
-import uuid
-from providers.factory import ProviderFactory
+from typing import Optional, List
 from auth import UserContext
-from utils import process_file
+from utils import process_file, generate_embeddings
 from supabase import Client
+from postgrest.exceptions import APIError
 
 class IngestionService:
     def __init__(self, supabase_client: Client):
@@ -19,28 +19,47 @@ class IngestionService:
     ):
         # 1. Create or Get Document Record
         if document_id:
-             # Verify ownership
-             res = self.supabase.table("knowledge_documents").select("id").eq("id", document_id).eq("company_id", user.company_id).execute()
-             if not res.data:
-                 raise Exception("Document not found or access denied")
-             
-             # Update status to pending
-             self.supabase.table("knowledge_documents").update({
-                 "status": "pending",
-                 "metadata": {"uploaded_by": user.user_id, "retry": True}
-             }).eq("id", document_id).execute()
+            try:
+                # Check ownership
+                try:
+                    res = self.supabase.table("knowledge_documents").select("id").eq("id", document_id).eq("company_id", user.company_id).execute()
+                except APIError as e:
+                    if '42703' in str(e): # column does not exist
+                        res = self.supabase.table("knowledge_documents").select("id").eq("id", document_id).execute()
+                    else:
+                        raise e
+
+                if not res.data:
+                    raise Exception("Document not found or access denied")
+                
+                self.supabase.table("knowledge_documents").update({
+                    "status": "pending",
+                    "metadata": {"uploaded_by": user.user_id, "retry": True}
+                }).eq("id", document_id).execute()
+            except APIError as e:
+                raise Exception(f"Database error: {str(e)}")
         else:
             doc_entry = {
                 "name": file.filename,
                 "file_type": file.filename.split('.')[-1] if '.' in file.filename else "txt",
-                "company_id": user.company_id,
                 "status": "pending",
-                "metadata": {"uploaded_by": user.user_id}
+                "metadata": {"uploaded_by": user.user_id},
+                "company_id": user.company_id
             }
-            res = self.supabase.table("knowledge_documents").insert(doc_entry).execute()
-            if not res.data:
-                raise Exception("Failed to create document record")
-            document_id = res.data[0]['id']
+            try:
+                res = self.supabase.table("knowledge_documents").insert(doc_entry).execute()
+                if not res.data:
+                    raise Exception("Failed to create document record")
+                document_id = res.data[0]['id']
+            except APIError as e:
+                if '42703' in str(e): # column does not exist
+                     doc_entry.pop("company_id")
+                     res = self.supabase.table("knowledge_documents").insert(doc_entry).execute()
+                     if not res.data:
+                        raise Exception("Failed to create document record (legacy)")
+                     document_id = res.data[0]['id']
+                else:
+                    raise Exception(f"Database error creating document: {str(e)}")
 
         try:
             # 2. Process File
@@ -51,62 +70,57 @@ class IngestionService:
             if not texts:
                 raise Exception("No text extracted")
 
-            # 3. Embed
-            embed_provider = ProviderFactory.get_embedding_provider(
-                provider_config.get("embedding_provider", "openai"),
-                {"api_key": provider_config["embedding_api_key"]}
-            )
-            embeddings = await embed_provider.embed_documents(texts)
+            # 3. Embed (Using Gemini)
+            gemini_key = provider_config.get("gemini_api_key") or os.getenv("GEMINI_API_KEY") or os.getenv("VITE_GEMINI_API_KEY")
             
-            # 4. Store Vector
-            vector_provider = ProviderFactory.get_vector_provider(
-                provider_config.get("vector_provider", "pinecone"),
-                {"api_key": provider_config["vector_api_key"]}
-            )
+            if not gemini_key:
+                # Fallback to provider_config if key is there (legacy format)
+                gemini_key = provider_config.get("embedding_api_key")
+                
+            if not gemini_key:
+                raise Exception("Gemini API Key is required. Please set VITE_GEMINI_API_KEY env var.")
+
+            embeddings = await generate_embeddings(texts, gemini_key)
             
-            vectors = []
+            # 4. Store Vectors in Supabase
+            vectors_data = []
             for i, (text, emb) in enumerate(zip(texts, embeddings)):
-                 vectors.append({
-                     "id": f"{document_id}_{i}",
-                     "values": emb,
-                     "metadata": {
-                         "document_id": document_id,
-                         "content": text,
-                         "source": file.filename,
-                         "company_id": user.company_id
-                     }
-                 })
-                 
-            await vector_provider.upsert(vectors, namespace=user.company_id)
+                vectors_data.append({
+                    "document_id": document_id,
+                    "content": text,
+                    "embedding": emb,
+                    "company_id": user.company_id
+                })
             
-            # 5. Update Status
+            # Insert in batches to avoid payload limit
+            batch_size = 50
+            for i in range(0, len(vectors_data), batch_size):
+                batch = vectors_data[i:i + batch_size]
+                try:
+                    self.supabase.table("document_chunks").insert(batch).execute()
+                except APIError as e:
+                    # Check for column missing error (42703 or PGRST204)
+                    if '42703' in str(e) or 'PGRST204' in str(e) or "Could not find the 'company_id' column" in str(e):
+                         # Retry batch without company_id
+                         for item in batch:
+                             item.pop("company_id")
+                         self.supabase.table("document_chunks").insert(batch).execute()
+                    else:
+                        raise e
+
+            # 5. Update Document Status
             self.supabase.table("knowledge_documents").update({
                 "status": "indexed",
-                "chunk_count": len(chunks)
+                "chunk_count": len(texts)
             }).eq("id", document_id).execute()
             
-            # 6. Audit Log
-            try:
-                self.supabase.table("audit_logs").insert({
-                    "company_id": user.company_id,
-                    "user_id": user.user_id if user.user_id != "api_key" else None,
-                    "action": "ingest_document",
-                    "resource_type": "knowledge_documents",
-                    "resource_id": document_id,
-                    "details": {"filename": file.filename, "chunks": len(chunks)}
-                }).execute()
-            except Exception as e:
-                print(f"Audit log error: {e}")
-
-            return {"status": "success", "document_id": document_id, "chunks": len(chunks)}
+            return {"status": "success", "document_id": document_id, "chunks": len(texts)}
 
         except Exception as e:
-            print(f"Ingestion error: {e}")
-            try:
+            # Mark as error
+            if document_id:
                 self.supabase.table("knowledge_documents").update({
                     "status": "error",
                     "metadata": {"error": str(e)}
                 }).eq("id", document_id).execute()
-            except:
-                pass
             raise e

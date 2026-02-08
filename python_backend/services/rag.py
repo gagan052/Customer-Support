@@ -44,10 +44,28 @@ class RAGService:
             {"api_key": provider_config["llm_api_key"]}
         )
         
-        system_prompt = f"""You are a helpful assistant. Use the following context to answer the user's question.
-        
-        Context:
-        {context_str}
+        system_prompt = f"""
+You are a helpful and intelligent AI support agent.
+Your goal is to assist users with their questions accurately and efficiently.
+
+Context from Knowledge Base:
+{context_str}
+
+Instructions:
+- Use the provided context to answer the user's question.
+- If the context doesn't contain the answer, use your general knowledge but be transparent.
+- Be polite, professional, and concise.
+- Output your response in JSON format matching the schema below.
+
+Response Schema (JSON):
+{{
+  "content": "The actual response text to the user",
+  "intent": "The classified intent (e.g., general_query, technical_issue)",
+  "confidence": 0.0 to 1.0,
+  "sentiment": "positive" | "neutral" | "negative",
+  "action": "resolve" | "clarify" | "escalate",
+  "reasoning": "Brief explanation of your decision"
+}}
         """
         
         # Prepare messages for LLM

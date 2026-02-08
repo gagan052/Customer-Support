@@ -1,14 +1,20 @@
-
 export type { AIResponse } from "./ai-service";
 import { AIResponse } from "./ai-service";
-import { retrieveKnowledge } from "./client-knowledge-service";
+import { retrieveKnowledge, getBackendUrl } from "./client-knowledge-service";
 import { getOpenAIKey, getGeminiKey, getActiveProvider } from "./api-config";
+import { supabase } from "@/integrations/supabase/client";
 
 export async function sendMessageToAI(
   message: string,
   sessionId: string,
   conversationId?: string
 ): Promise<AIResponse> {
+  // Check if we have a Python Backend configured
+  const backendUrl = import.meta.env.VITE_PYTHON_BACKEND_URL;
+  if (backendUrl) {
+    return sendMessageToBackend(message, sessionId, conversationId);
+  }
+
   const provider = getActiveProvider();
   
   // 1. Retrieve Context (Best Effort)
@@ -208,6 +214,97 @@ async function sendMessageToOpenAI(message: string, systemPrompt: string, hasCon
     console.error("Client AI Service Error (OpenAI):", error);
     return {
       content: "I apologize, but I'm having trouble processing your request right now. Please try again later.",
+      intent: "error",
+      confidence: 0,
+      sentiment: "neutral",
+      action: "escalate",
+      error: error.message
+    };
+  }
+}
+
+async function sendMessageToBackend(message: string, sessionId: string, conversationId?: string): Promise<AIResponse> {
+  const provider = getActiveProvider();
+  const apiKey = provider === 'gemini' ? getGeminiKey() : getOpenAIKey();
+  
+  try {
+    const session = await supabase.auth.getSession();
+    const token = session.data.session?.access_token;
+    
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json"
+    };
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(getBackendUrl("chat"), {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({
+        messages: [
+          { role: "user", content: message }
+        ],
+        provider_config: {
+          llm_provider: provider,
+          llm_api_key: apiKey,
+          embedding_provider: provider,
+          embedding_api_key: apiKey
+        }
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      // Check for quota exceeded from backend
+      if (response.status === 429 || errorText.includes("quota") || errorText.includes("429")) {
+         return {
+            content: "I apologize, but the AI service is currently unavailable due to quota limits (backend). Please check your API key settings.",
+            intent: "technical_issue",
+            confidence: 1.0,
+            sentiment: "neutral",
+            action: "escalate",
+            reasoning: "Backend Quota Exceeded",
+            ragSourcesUsed: false
+          };
+      }
+      throw new Error(`Backend API error: ${errorText}`);
+    }
+
+    const result = await response.json();
+    
+    // Parse nested JSON in response field
+    let parsedContent;
+    try {
+        let cleanContent = result.response;
+        if (cleanContent.includes("```json")) {
+            cleanContent = cleanContent.replace(/```json\n?|\n?```/g, "");
+        } else if (cleanContent.includes("```")) {
+            cleanContent = cleanContent.replace(/```\n?|\n?```/g, "");
+        }
+        parsedContent = JSON.parse(cleanContent);
+    } catch (e) {
+        console.warn("Failed to parse backend JSON response, using raw text", e);
+        parsedContent = {
+            content: result.response,
+            intent: "general_query",
+            confidence: 0.8,
+            sentiment: "neutral",
+            action: "resolve",
+            reasoning: "Processed by Backend (Unstructured)"
+        };
+    }
+
+    return {
+      ...parsedContent,
+      ragSourcesUsed: !!result.sources && result.sources.length > 0,
+      sources: result.sources
+    };
+
+  } catch (error: any) {
+    console.error("Backend AI Service Error:", error);
+    return {
+      content: "I apologize, but I'm having trouble connecting to the server. " + error.message,
       intent: "error",
       confidence: 0,
       sentiment: "neutral",

@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { getOpenAIKey, getGeminiKey, getActiveProvider } from "./api-config";
 
 // Helper to construct backend URLs
-function getBackendUrl(endpoint: string) {
+export function getBackendUrl(endpoint: string) {
   let url = import.meta.env.VITE_PYTHON_BACKEND_URL || "http://localhost:8000/ingest";
   // If url ends with /ingest, strip it to get base
   if (url.endsWith("/ingest")) {
